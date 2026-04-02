@@ -196,6 +196,15 @@ async function ensureApiKey(silent: boolean, secrets: vscode.SecretStorage): Pro
 	// Fall back to generic API key
 	let apiKey = await secrets.get("oaicopilot.apiKey");
 
+	// Fallback: check environment variable (useful for Codespaces)
+    if (!apiKey) {
+        apiKey = process.env.OAI_API_KEY;
+        if (apiKey) {
+            // Optionally persist it into SecretStorage for the session
+            await secrets.store("oaicopilot.apiKey", apiKey);
+        }
+    }
+
 	if (!apiKey && !silent) {
 		const entered = await vscode.window.showInputBox({
 			title: "OAI Compatible API Key",
