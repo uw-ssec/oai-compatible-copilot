@@ -1,0 +1,43 @@
+name: sandbox release
+
+on:
+  push:
+    branches:
+      - sandbox
+
+permissions:
+  contents: write
+
+jobs:
+  package-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run compile
+
+      - name: Package VSIX
+        run: ./node_modules/.bin/vsce package -o oai-compatible-copilot-sandbox.vsix
+
+      - name: Compute SHA256
+        run: sha256sum oai-compatible-copilot-sandbox.vsix > oai-compatible-copilot-sandbox.vsix.sha256
+
+      - name: Replace sandbox-latest release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete sandbox-latest --yes --cleanup-tag || true
+          gh release create sandbox-latest \
+            oai-compatible-copilot-sandbox.vsix \
+            oai-compatible-copilot-sandbox.vsix.sha256 \
+            --title "OAI-Compatible Copilot VSIX (Sandbox latest)" \
+            --notes "Built from commit ${{ github.sha }}" \
+            --prerelease \
+            --target sandbox

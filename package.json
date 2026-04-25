@@ -1,7 +1,7 @@
 {
 	"name": "oai-compatible-copilot",
-	"publisher": "johnny-zhao",
-	"displayName": "OAI Compatible Provider for Copilot",
+	"publisher": "uw-ssec",
+	"displayName": "LLMaven Copilot Provider",
 	"description": "An extension that integrates OpenAI/Ollama/Anthropic/Gemini API Providers into GitHub Copilot Chat",
 	"icon": "assets/logo.png",
 	"keywords": [
@@ -23,7 +23,7 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/JohnnyZ93/oai-compatible-copilot"
+		"url": "https://github.com/uw-ssec/oai-compatible-copilot"
 	},
 	"version": "0.3.4",
 	"engines": {
