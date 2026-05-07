@@ -94,6 +94,18 @@ export interface HFModelItem {
 	 * If not specified, falls back to global `oaicopilot.delay` configuration.
 	 */
 	delay?: number;
+
+	/**
+	 * Whether the model appears in the Copilot Chat model picker without requiring
+	 * the user to manually unhide it via "Manage Models". Opt-in per model; default false.
+	 */
+	isUserSelectable?: boolean;
+
+	/**
+	 * Whether the model is preselected as the default in the Copilot Chat model picker.
+	 * Only honored when `isUserSelectable` is true.
+	 */
+	isDefault?: boolean;
 }
 
 /**

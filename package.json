@@ -356,6 +356,16 @@
 								"default": 0,
 								"minimum": 0,
 								"description": "Model-specific delay in milliseconds between consecutive requests. If not specified, falls back to global oaicopilot.delay configuration."
+							},
+							"isUserSelectable": {
+								"type": "boolean",
+								"default": false,
+								"description": "If true, this model appears in the Copilot Chat model picker automatically without needing to be unhidden via 'Manage Models'. Opt-in per model. Default is false."
+							},
+							"isDefault": {
+								"type": "boolean",
+								"default": false,
+								"description": "If true, this model is preselected as the default in the Copilot Chat model picker. Only honored when isUserSelectable is true. Default is false."
 							}
 						},
 						"required": [

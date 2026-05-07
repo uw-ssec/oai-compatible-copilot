@@ -51,6 +51,8 @@ export async function prepareLanguageModelChatInformation(
 					version: "1.0.0",
 					maxInputTokens: maxInput,
 					maxOutputTokens: maxOutput,
+					isUserSelectable: m.isUserSelectable ?? false,
+					isDefault: m.isDefault ?? false,
 					capabilities: {
 						toolCalling: true,
 						imageInput: m?.vision ?? false,
@@ -127,6 +129,19 @@ export async function prepareLanguageModelChatInformation(
 			}
 
 			return entries;
+		});
+	}
+
+	// Enforce a single default: first-wins, demote any subsequent isDefault entries.
+	const defaults = infos.filter((i) => i.isDefault);
+	if (defaults.length > 1) {
+		const [keep, ...demoted] = defaults;
+		for (const info of demoted) {
+			(info as { isDefault?: boolean }).isDefault = false;
+		}
+		logger.warn("models.default.conflict", {
+			kept: keep.id,
+			demoted: demoted.map((d) => d.id),
 		});
 	}
 
