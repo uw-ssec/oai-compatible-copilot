@@ -548,6 +548,12 @@ export class HuggingFaceChatModelProvider implements LanguageModelChatProvider {
 			apiKey = await this.secrets.get("oaicopilot.apiKey");
 		}
 
+		// Fall back to environment variable (useful for Codespaces / dev containers)
+		if (!apiKey && process.env.OAI_API_KEY) {
+			apiKey = process.env.OAI_API_KEY;
+			await this.secrets.store("oaicopilot.apiKey", apiKey);
+		}
+
 		if (!apiKey && useGenericKey) {
 			const entered = await vscode.window.showInputBox({
 				title: "OAI Compatible API Key",
