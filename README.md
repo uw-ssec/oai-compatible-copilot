@@ -1,7 +1,7 @@
-# 🤗 OAI Compatible Provider for Copilot
+# LLMoxie Model Provider for Copilot
 
-[![CI](https://github.com/JohnnyZ93/oai-compatible-copilot/actions/workflows/release.yml/badge.svg)](https://github.com/JohnnyZ93/oai-compatible-copilot/actions)
-[![License](https://img.shields.io/github/license/JohnnyZ93/oai-compatible-copilot?color=orange&label=License)](https://github.com/JohnnyZ93/oai-compatible-copilot/blob/main/LICENSE)
+[![CI](https://github.com/uw-ssec/oai-compatible-copilot/actions/workflows/release.yml/badge.svg)](https://github.com/uw-ssec/oai-compatible-copilot/actions)
+[![License](https://img.shields.io/github/license/uw-ssec/oai-compatible-copilot?color=orange&label=License)](https://github.com/uw-ssec/oai-compatible-copilot/blob/main/LICENSE)
 
 Use frontier open LLMs like GPT 5.2, Gemini 3, Kimi K2.5, DeepSeek V3.2, GLM 4.7, Minimax 2.1, Qwen3 Coder and more in VS Code with GitHub Copilot Chat powered by any OpenAI-compatible provider 🔥
 
@@ -25,11 +25,11 @@ Use frontier open LLMs like GPT 5.2, Gemini 3, Kimi K2.5, DeepSeek V3.2, GLM 4.7
 - OpenAI-compatible provider API key.
 
 ## ⚡ Quick Start
-1. Install the OAI Compatible Provider for Copilot extension [here](https://marketplace.visualstudio.com/items?itemName=johnny-zhao.oai-compatible-copilot).
+1. Install the LLMoxie Model Provider for Copilot extension [here](https://marketplace.visualstudio.com/items?itemName=uw-ssec.oai-compatible-copilot).
 2. Open VS Code Settings and configure `oaicopilot.baseUrl` and `oaicopilot.models`.
 3. Open GitHub Copilot Chat interface.
 4. Click the model picker and select "Manage Models...".
-5. Choose "OAI Compatible" provider.
+5. Choose "LLMoxie Gateway" provider.
 6. Enter your API key — it will be saved locally.
 7. Select the models you want to add to the model picker.
 
@@ -61,7 +61,7 @@ What this means in practice:
 **One-time unhide** for an existing model:
 
 1. Open Copilot Chat → click the model picker → **Manage Models**.
-2. Find the model under the "OAI Compatible" provider.
+2. Find the model under the "LLMoxie Gateway" provider.
 3. Click the eye icon (or 3-dot menu → **Show in chat model picker**).
 
 After that, the model appears in the inline picker and your choice is remembered. You only need to do this once per model. Editing other settings on the model later will be picked up automatically — the extension notifies VS Code on `oaicopilot.models` / `oaicopilot.baseUrl` changes via the `onDidChangeLanguageModelChatInformation` event so no reload is required.
@@ -106,7 +106,7 @@ There are two ways to open the configuration interface:
    - Open GitHub Copilot Chat (`Ctrl+Shift+I` or `Cmd+Shift+I`)
    - Click the model picker in the chat input
    - Select "Manage Models..."
-   - Choose "OAI Compatible" provider
+   - Choose "LLMoxie Gateway" provider
    - Select your configured models
    - Start chatting with the model!
 
@@ -208,7 +208,7 @@ Mixed configuration with multiple API modes:
 2. Open command center ( Ctrl+Shift+P ), and search "OAICopilot: Set OAI Compatible Multi-Provider API Key" to configure provider-specific API keys.
 3. Open GitHub Copilot Chat interface.
 4. Click the model picker and select "Manage Models...".
-5. Choose "OAI Compatible" provider.
+5. Choose "LLMoxie Gateway" provider.
 6. Select the models you want to add to the model picker.
 
 <details>
@@ -474,10 +474,10 @@ All parameters support individual configuration for different models, providing 
 
 Thanks to all the people who contribute.
 
-- [Contributors](https://github.com/JohnnyZ93/oai-compatible-copilot/graphs/contributors)
+- [Contributors](https://github.com/uw-ssec/oai-compatible-copilot/graphs/contributors)
 - [Hugging Face Chat Extension](https://github.com/huggingface/huggingface-vscode-chat)
 - [VS Code Chat Provider API](https://code.visualstudio.com/api/extension-guides/ai/language-model-chat-provider)
 
 ## Support & License
-- Open issues: https://github.com/JohnnyZ93/oai-compatible-copilot/issues
+- Open issues: https://github.com/uw-ssec/oai-compatible-copilot/issues
 - License: MIT License Copyright (c) 2025 Johnny Zhao

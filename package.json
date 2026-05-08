@@ -35,13 +35,13 @@
 	],
 	"badges": [
 		{
-			"url": "https://img.shields.io/github/stars/JohnnyZ93/oai-compatible-copilot?style=social",
+			"url": "https://img.shields.io/github/stars/uw-ssec/oai-compatible-copilot?style=social",
 			"description": "Star oai-compatible-copilot on Github",
-			"href": "https://github.com/JohnnyZ93/oai-compatible-copilot"
+			"href": "https://github.com/uw-ssec/oai-compatible-copilot"
 		}
 	],
 	"bugs": {
-		"url": "https://github.com/JohnnyZ93/oai-compatible-copilot/issues"
+		"url": "https://github.com/uw-ssec/oai-compatible-copilot/issues"
 	},
 	"license": "MIT",
 	"enabledApiProposals": [
