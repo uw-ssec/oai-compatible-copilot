@@ -49,6 +49,23 @@ Use frontier open LLMs like GPT 5.2, Gemini 3, Kimi K2.5, DeepSeek V3.2, GLM 4.7
 ]
 ```
 
+### 👁️ Model Visibility in the Chat Picker
+
+VS Code persists per-model visibility in its own settings store, *separately* from anything this extension returns. The `isUserSelectable` flag on a model is only honored **the first time VS Code sees that model ID** — once VS Code has decided a model is hidden, the persisted state wins on every subsequent enumeration.
+
+What this means in practice:
+
+- **New model IDs** with `"isUserSelectable": true` appear in the inline chat model picker automatically.
+- **Models VS Code has already seen** (e.g., added before you set the flag, or added when the extension didn't yet support the flag) stay hidden until you unhide them once.
+
+**One-time unhide** for an existing model:
+
+1. Open Copilot Chat → click the model picker → **Manage Models**.
+2. Find the model under the "OAI Compatible" provider.
+3. Click the eye icon (or 3-dot menu → **Show in chat model picker**).
+
+After that, the model appears in the inline picker and your choice is remembered. You only need to do this once per model. Editing other settings on the model later will be picked up automatically — the extension notifies VS Code on `oaicopilot.models` / `oaicopilot.baseUrl` changes via the `onDidChangeLanguageModelChatInformation` event so no reload is required.
+
 ## ✨ Configuration UI
 
 The extension provides a visual configuration interface that makes it easy to manage global settings, providers, and models without editing JSON files manually.
@@ -450,6 +467,8 @@ All parameters support individual configuration for different models, providing 
 - `apiMode`: API mode: 'openai' (Default) for API (/chat/completions), 'openai-responses' for API (/responses), 'ollama' for API (/api/chat), 'anthropic' for API (/v1/messages), 'gemini' for API (/v1beta/models/{model}:streamGenerateContent?alt=sse).
 - `delay`: Model-specific delay in milliseconds between consecutive requests. If not specified, falls back to global `oaicopilot.delay` configuration.
 - `useForCommitGeneration`: Whether to be used for Git commit message generation. Not supports gemini apiMode.
+- `isUserSelectable`: Whether the model appears in the Copilot Chat model picker without manual unhiding via "Manage Models". Default `false`. **Note:** only takes effect the first time VS Code sees a given model ID — see [Model Visibility in the Chat Picker](#-model-visibility-in-the-chat-picker) for the one-time unhide procedure on existing models.
+- `isDefault`: Whether the model is preselected as the default in the Copilot Chat model picker. Only honored when `isUserSelectable` is `true`. Default `false`. If multiple models set this to `true`, the first one wins and the rest are demoted with a warning log.
 
 ## Thanks to
 
