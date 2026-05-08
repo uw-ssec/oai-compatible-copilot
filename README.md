@@ -1,9 +1,8 @@
 # LLMoxie Model Provider for Copilot
 
-[![CI](https://github.com/uw-ssec/oai-compatible-copilot/actions/workflows/release.yml/badge.svg)](https://github.com/uw-ssec/oai-compatible-copilot/actions)
 [![License](https://img.shields.io/github/license/uw-ssec/oai-compatible-copilot?color=orange&label=License)](https://github.com/uw-ssec/oai-compatible-copilot/blob/main/LICENSE)
 
-Use frontier open LLMs like GPT 5.2, Gemini 3, Kimi K2.5, DeepSeek V3.2, GLM 4.7, Minimax 2.1, Qwen3 Coder and more in VS Code with GitHub Copilot Chat powered by any OpenAI-compatible provider 🔥
+Use any model served by the LLMoxie AI Gateway — GPT, Claude, Gemini, and more — directly in GitHub Copilot Chat 🔥
 
 ‼️ **Important**: This extension is not currently available to Copilot Business or Copilot Enterprise users. [FYI](https://code.visualstudio.com/docs/copilot/customization/language-models#_bring-your-own-language-model-key)
 
@@ -25,7 +24,9 @@ Use frontier open LLMs like GPT 5.2, Gemini 3, Kimi K2.5, DeepSeek V3.2, GLM 4.7
 - OpenAI-compatible provider API key.
 
 ## ⚡ Quick Start
-1. Install the LLMoxie Model Provider for Copilot extension [here](https://marketplace.visualstudio.com/items?itemName=uw-ssec.oai-compatible-copilot).
+1. Install the LLMoxie Model Provider for Copilot extension by downloading the latest `.vsix` from [GitHub Releases](https://github.com/uw-ssec/oai-compatible-copilot/releases), then either:
+   - In VS Code: Extensions view → `⋯` menu → **Install from VSIX…** → pick the downloaded file, or
+   - From a terminal: `code --install-extension path/to/oai-compatible-copilot.vsix`
 2. Open VS Code Settings and configure `oaicopilot.baseUrl` and `oaicopilot.models`.
 3. Open GitHub Copilot Chat interface.
 4. Click the model picker and select "Manage Models...".
@@ -36,11 +37,11 @@ Use frontier open LLMs like GPT 5.2, Gemini 3, Kimi K2.5, DeepSeek V3.2, GLM 4.7
 ### Settings Example
 
 ```json
-"oaicopilot.baseUrl": "https://api-inference.modelscope.cn/v1",
+"oaicopilot.baseUrl": "https://uw-ssec-llmaven.hf.space",
 "oaicopilot.models": [
     {
-        "id": "Qwen/Qwen3-Coder-480B-A35B-Instruct",
-        "owned_by": "modelscope",
+        "id": "gpt-5.4-mini",
+        "owned_by": "llmoxie",
         "context_length": 256000,
         "max_tokens": 8192,
         "temperature": 0,
@@ -467,7 +468,7 @@ All parameters support individual configuration for different models, providing 
 - `apiMode`: API mode: 'openai' (Default) for API (/chat/completions), 'openai-responses' for API (/responses), 'ollama' for API (/api/chat), 'anthropic' for API (/v1/messages), 'gemini' for API (/v1beta/models/{model}:streamGenerateContent?alt=sse).
 - `delay`: Model-specific delay in milliseconds between consecutive requests. If not specified, falls back to global `oaicopilot.delay` configuration.
 - `useForCommitGeneration`: Whether to be used for Git commit message generation. Not supports gemini apiMode.
-- `isUserSelectable`: Whether the model appears in the Copilot Chat model picker without manual unhiding via "Manage Models". Default `false`. **Note:** only takes effect the first time VS Code sees a given model ID — see [Model Visibility in the Chat Picker](#-model-visibility-in-the-chat-picker) for the one-time unhide procedure on existing models.
+- `isUserSelectable`: Whether the model appears in the Copilot Chat model picker without manual unhiding via "Manage Models". Default `false`. **Note:** only takes effect the first time VS Code sees a given model ID; existing models need a one-time eye-icon unhide in Manage Models.
 - `isDefault`: Whether the model is preselected as the default in the Copilot Chat model picker. Only honored when `isUserSelectable` is `true`. Default `false`. If multiple models set this to `true`, the first one wins and the rest are demoted with a warning log.
 
 ## Thanks to
@@ -480,4 +481,4 @@ Thanks to all the people who contribute.
 
 ## Support & License
 - Open issues: https://github.com/uw-ssec/oai-compatible-copilot/issues
-- License: MIT License Copyright (c) 2025 Johnny Zhao
+- License: MIT — Copyright (c) 2025 Johnny Zhao; Copyright (c) 2026 University of Washington Scientific Software Engineering Center
