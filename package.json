@@ -1,7 +1,7 @@
 {
 	"name": "oai-compatible-copilot",
 	"publisher": "uw-ssec",
-	"displayName": "LLMaven Copilot Provider",
+	"displayName": "LLMoxie Model Provider",
 	"description": "An extension that integrates OpenAI/Ollama/Anthropic/Gemini API Providers into GitHub Copilot Chat",
 	"icon": "assets/logo.png",
 	"keywords": [
@@ -51,7 +51,7 @@
 		"languageModelChatProviders": [
 			{
 				"vendor": "oaicopilot",
-				"displayName": "OAI Compatible",
+				"displayName": "LLMoxie Gateway",
 				"managementCommand": "oaicopilot.setApikey"
 			}
 		],
