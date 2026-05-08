@@ -18,7 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
 	const tokenCountStatusBarItem: vscode.StatusBarItem = initStatusBar(context);
 	const provider = new HuggingFaceChatModelProvider(context.secrets, tokenCountStatusBarItem);
 	// Register the Hugging Face provider under the vendor id used in package.json
-	vscode.lm.registerLanguageModelChatProvider("oaicopilot", provider);
+	context.subscriptions.push(vscode.lm.registerLanguageModelChatProvider("oaicopilot", provider), provider);
 
 	// Management command to configure API key
 	context.subscriptions.push(
@@ -117,11 +117,17 @@ export function activate(context: vscode.ExtensionContext) {
 		})
 	);
 
-	// Watch for logLevel configuration changes
+	// Watch for configuration changes
 	context.subscriptions.push(
 		vscode.workspace.onDidChangeConfiguration((e) => {
 			if (e.affectsConfiguration("oaicopilot.logLevel")) {
 				logger.reloadConfig();
+			}
+			// Re-enumerate models when settings that affect the model list change,
+			// so the chat input model picker reflects edits without requiring the
+			// user to open and close the management picker to force a refresh.
+			if (e.affectsConfiguration("oaicopilot.models") || e.affectsConfiguration("oaicopilot.baseUrl")) {
+				provider.refreshModels();
 			}
 		})
 	);

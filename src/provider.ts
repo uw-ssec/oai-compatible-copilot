@@ -40,6 +40,9 @@ export class HuggingFaceChatModelProvider implements LanguageModelChatProvider {
 
 	static readonly OPENAI_RESPONSES_STATEFUL_MARKER_MIME = "application/vnd.oaicopilot.stateful-marker";
 
+	private readonly _onDidChangeLanguageModelChatInformation = new vscode.EventEmitter<void>();
+	readonly onDidChangeLanguageModelChatInformation = this._onDidChangeLanguageModelChatInformation.event;
+
 	/**
 	 * Create a provider using the given secret storage for the API key.
 	 * @param secrets VS Code secret storage.
@@ -48,6 +51,20 @@ export class HuggingFaceChatModelProvider implements LanguageModelChatProvider {
 		private readonly secrets: vscode.SecretStorage,
 		private readonly statusBarItem: vscode.StatusBarItem
 	) {}
+
+	/**
+	 * Notify VS Code that the model list has changed so it re-calls
+	 * {@link provideLanguageModelChatInformation}. Call this when settings that
+	 * affect the model list (e.g. `oaicopilot.models`, `oaicopilot.baseUrl`)
+	 * change, so the chat input picker reflects the new list immediately.
+	 */
+	refreshModels(): void {
+		this._onDidChangeLanguageModelChatInformation.fire();
+	}
+
+	dispose(): void {
+		this._onDidChangeLanguageModelChatInformation.dispose();
+	}
 
 	/**
 	 * Get the list of available language models contributed by this provider
